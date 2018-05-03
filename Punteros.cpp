@@ -1,4 +1,4 @@
-// Punteros.cpp: define el punto de entrada de la aplicación de consola.
+// Punteros.cpp: define el punto de entrada de la aplicaciÃ³n de consola.
 //1/05/2017 @Furiduri https://github.com/Furiduri
 
 #include "stdafx.h"
@@ -20,6 +20,7 @@ struct NODO
 //Prototipos de Funciones para LLenar los datos e Imprimir.
 void llenar_Grupo(NODO *, int );
 void Imprimir_Grupo(NODO *, int);
+int Buscar(NODO *, int, int);
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -33,7 +34,21 @@ int _tmain(int argc, _TCHAR* argv[])
 	llenar_Grupo(P_Nodo, x);
 	//Se llama a la funcion Para imprimir.
 	Imprimir_Grupo(P_Nodo,x);
-
+	//Buscar un registro.
+	int key,Res;
+	cout<<"Ingrese un Registro a buscar: ";
+	cin>>key;
+	Res=Buscar(Grupo, x, key);
+	if(Res>-1){
+		cout<<"//////////////"<<endl;
+		cout<<"Encontrado."<<endl;
+		cout<<"Nombre: "<<Grupo[Res].Nombre<<endl;
+		cout<<"Registro: "<<Grupo[Res].Registro<<endl;
+	}else if(Res==-1){
+		cout<<"//////////////"<<endl;
+		cout<<"ERROR: 404 Registro NOT FOUND"<<endl;
+		cout<<"//////////////"<<endl;
+	}
 	_getch();
 	return 0;
 }
@@ -59,4 +74,16 @@ void Imprimir_Grupo(NODO *A, int N){
 		cout<<"Registro: "<<A->Registro<<endl;
 		A++;
 	}
+}
+
+//Buscar Por mitad.
+int Buscar(NODO *A, int N, int NaB) {
+	for (int c = 0; c < N; c++)
+	{
+		if (A[c].Registro==NaB)
+		{
+			return c;
+		}
+	}
+	return -1;
 }
